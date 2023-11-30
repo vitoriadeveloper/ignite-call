@@ -16,7 +16,7 @@ export default function Schedule({ user }: Readonly<ScheduleProps>) {
       <UserHeader>
         <Avatar src={user.avatarUrl} />
         <Heading>{user.name}</Heading>
-        <Text>{user.bio}e</Text>
+        <Text>{user.bio}</Text>
       </UserHeader>
       <ScheduleForm />
     </Container>
