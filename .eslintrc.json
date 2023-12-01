@@ -1,7 +1,9 @@
 {
   "extends": ["next/core-web-vitals", "@rocketseat/eslint-config/next"],
   "rules": {
-    "camelcase": "off"
+    "camelcase": "off",
+    "semi": "off"
+
   }
   
 }
