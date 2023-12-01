@@ -3,6 +3,7 @@ import { Container, UserHeader } from "./styles";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { prisma } from "@/src/lib/prisma";
 import { ScheduleForm } from "./ScheduleForm";
+import { NextSeo } from "next-seo";
 interface ScheduleProps {
   user: {
     name: string;
@@ -12,14 +13,18 @@ interface ScheduleProps {
 }
 export default function Schedule({ user }: Readonly<ScheduleProps>) {
   return (
-    <Container>
-      <UserHeader>
-        <Avatar src={user.avatarUrl} />
-        <Heading>{user.name}</Heading>
-        <Text>{user.bio}</Text>
-      </UserHeader>
-      <ScheduleForm />
-    </Container>
+    <>
+      <NextSeo title={`Agendar com ${user.name} | Ignite Call`} />
+
+      <Container>
+        <UserHeader>
+          <Avatar src={user.avatarUrl} />
+          <Heading>{user.name}</Heading>
+          <Text>{user.bio}</Text>
+        </UserHeader>
+        <ScheduleForm />
+      </Container>
+    </>
   );
 }
 

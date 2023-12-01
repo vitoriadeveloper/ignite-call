@@ -10,7 +10,7 @@ export const Container = styled(Box, {
   variants: {
     isTimePickerOpen: {
       true: {
-        gridTemplateColumns: "1fr  280px",
+        gridTemplateColumns: "1fr 280px",
         "@media(max-width:900px)": {
           gridTemplateColumns: "1fr",
         },
@@ -35,6 +35,11 @@ export const TimePicker = styled("div", {
   bottom: 0,
   right: 0,
   width: 280,
+
+  "@media(max-width:900px)": {
+    position: "unset",
+    width: "100%",
+  },
 });
 export const TimePickerHeader = styled(Text, {
   fontWeight: "$medium",

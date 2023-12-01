@@ -98,11 +98,13 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
       currentDate.daysInMonth(),
     );
     const lastWeekDay = lastDayInCurrentMonth.get("day");
+
     const nextMonthFillArray = Array.from({
       length: 7 - (lastWeekDay + 1),
     }).map((_, i) => {
       return lastDayInCurrentMonth.add(i + 1, "day");
     });
+
     const calendarDays = [
       ...previousMonthFillArray.map((date) => {
         return { date, disabled: true };
@@ -120,6 +122,7 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
         return { date, disabled: true };
       }),
     ];
+
     const calendarWeeks = calendarDays.reduce<CalendarWeeks>(
       (weeks, _, i, original) => {
         // pegando o primeiro dia de uma nova semana

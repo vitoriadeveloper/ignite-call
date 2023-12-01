@@ -16,7 +16,11 @@ interface Availability {
   possibleTimes: number[];
   availableTimes: number[];
 }
-export function CalendarStep() {
+
+interface CalendarStepProps {
+  onSelectDateTime: (date: Date) => void;
+}
+export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const isDateSelected = !!selectedDate; // dupla negacao converte em boolean
   const router = useRouter();
@@ -39,10 +43,20 @@ export function CalendarStep() {
     enabled: !!selectedDate,
   });
 
+  function handleSelectTime(hour: number) {
+    const dateWithTime = dayjs(selectedDate)
+      .set("hour", hour)
+      .startOf("hour")
+      .toDate();
+
+    onSelectDateTime(dateWithTime);
+  }
+
   const weekDay = selectedDate ? dayjs(selectedDate).format("dddd") : null;
   const describeDate = selectedDate
     ? dayjs(selectedDate).format("DD[ de ] MMMM")
     : null;
+
   return (
     <Container isTimePickerOpen={isDateSelected}>
       <Calendar selectedDate={selectedDate} onDateSelected={setSelectedDate} />
@@ -53,10 +67,18 @@ export function CalendarStep() {
           </TimePickerHeader>
           <TimePickerList>
             {availability?.possibleTimes.map((hour) => {
+              const isDisabled =
+                availability.availableTimes.includes(hour) ||
+                dayjs(selectedDate)
+                  .set("hour", hour)
+                  .startOf("hour")
+                  .isBefore(dayjs());
               return (
                 <TimePickerItem
                   key={hour}
-                  disabled={!availability.availableTimes.includes(hour)}
+                  onClick={() => handleSelectTime(hour)}
+                  // possivel bug
+                  disabled={isDisabled}
                 >
                   {String(hour).padStart(2, "0")}:00h
                 </TimePickerItem>
