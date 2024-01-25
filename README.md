@@ -1,5 +1,6 @@
  # Ignite call
-
+🚧
+<p> 🚧A aplicação está com um erro ao selecionar o horário devido a timezone, portanto está selecionando para 3 horas a frente, irei consertar em breve 🚧</p>
   <img src="./src/assets/banner-github.png" width="100%" />
 
   ---
